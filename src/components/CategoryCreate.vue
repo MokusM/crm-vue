@@ -23,7 +23,7 @@
           <input
             id="limit"
             type="number"
-            v-model="limit"
+            v-model.number="limit"
             :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
           />
           <label for="limit">Лимит</label>
@@ -64,14 +64,16 @@ export default {
         return
       }
 
-      const formData = {
-        email: this.email,
-        password: this.password
-      }
-
       try {
-        await this.$store.dispatch('login', formData)
-        this.$router.push('/')
+        const category = await this.$store.dispatch('createCategory', {
+          title: this.title,
+          limit: this.limit
+        })
+        this.title = ''
+        this.limit = 100
+        this.$message('Категория была создана')
+        this.$emit('created', category)
+        this.$v.reset()
       } catch (e) {}
     }
   }
