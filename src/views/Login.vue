@@ -38,6 +38,7 @@
         >Минимальная длина пароля {{ $v.password.$params.minLength.min }} символов. Сейчас оно {{ password.length }}</small>
       </div>
     </div>
+    <div class="helper-text">loggin:test1@test.ua password:123456789</div>
     <div class="card-action">
       <div>
         <button
